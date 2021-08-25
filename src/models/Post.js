@@ -16,7 +16,8 @@ class Post extends Model{
         )
     }
 
-    static associations(){
+    static associate(models){
+        this>this.belongsTo(models.User);
         
     }
 }
