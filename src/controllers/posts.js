@@ -24,7 +24,7 @@ module.exports = {
                     }
                 ]
             }];
-        res.send(posts)
+            res.send(posts)
     },
 
     find(req,res){
