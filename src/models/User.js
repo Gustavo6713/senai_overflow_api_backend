@@ -1,8 +1,7 @@
-const {Model, DataTypes} = require("sequelize")
+const { Model, DataTypes } = require("sequelize");
 
-class User extends Model{
-
-    static init(connecttion){
+class User extends Model {
+    static init(connection){
         super.init(
             {
                 name: DataTypes.STRING,
@@ -10,16 +9,12 @@ class User extends Model{
                 password: DataTypes.STRING,
             },
             {
-                sequelize: connecttion,
+                sequelize: connection,
             }
-        )
+        );
     }
-
     static associate(models){
         this.hasMany(models.Post);
     }
 }
-
-
-
 module.exports = User;

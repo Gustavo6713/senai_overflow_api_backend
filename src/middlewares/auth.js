@@ -3,33 +3,35 @@ const auth = require("../config/auth");
 
 module.exports = (req, res, next) => {
 
-    //vamos pegar o token no cabeçalho
-    const authorization = authorization = req.headers.authorization;
+    //pegar o token no cabeçalho 
+    const authorization = req.headers.authorization;
 
-    //verificar se o token veio
-    if(!authorization) {
+    //verificar se token veio
+    if (!authorization) {
         return res.status(401).send({
-            error: "token não informado"
+            error: "Token não informado"
         })
     }
 
-    // separar o prefixo do token 
+    //separar o prefixo do token
     const [prefixo, token] = authorization.split(" ");
 
     //verificar se o token é válido
     try {
-        // se o token for valido, recebom o payload
+        //se token válido, recebemos o payload
         const payload = jwt.verify(token, auth.secret);
-        
-        // colocamos o id do usuario na requisição
-        // para que o controller possa recuperar
+
+        //colocamos o id do usuário na requisição
+        //para que o controller possa recuperar
         req.userId = payload.userId;
 
         return next();
 
     } catch (error) {
-        // retornamos token inválido
+        //retornamos token inválido
         res.status(401).send({ error: "Token inválido" });
     }
+
+
 
 }
